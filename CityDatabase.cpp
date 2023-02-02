@@ -7,43 +7,42 @@ class node{
         int x, y;
         node *next;
 
-} *head = NULL;
+} *headF = NULL, *headL = NULL;
 
-void insertFront(node **head, string city, int x, int y){
+void insertFront(string city, int x, int y){
     node *temp = new node();
     temp->city = city;
     temp->x = x;
     temp->y = y;
     temp->next = NULL;
-    if(*head == NULL){
-        *head = temp;
+    if(headF == NULL){
+        headF = temp;
+        headL = temp;
         return;
     }
-    temp->next = *head;
-    *head = temp;
+    temp->next = headF;
+    headF = temp;
 }
 
-void insertLast(node **head, string city, int x, int y){
+void insertLast(string city, int x, int y){
     node *temp = new node();
     temp->city = city;
     temp->x = x;
     temp->y = y;
     temp->next = NULL;
-    if(*head == NULL){
-        *head = temp;
+    if(headF == NULL){
+        headF = temp;
+        headL = temp;
         return;
     }
-    node *last = *head;
-    while(last->next != NULL){
-        last = last->next;
-    }
-    last->next = temp;
+    headL->next = temp;
+    headL = temp;
 }
 
 void Delete(string city){
-    node *temp = head;
+    node *temp = headF;
     if(temp != NULL && temp->city == city){
-        head = temp->next;
+        headF = temp->next;
         delete temp;
         return;
     }
@@ -61,9 +60,9 @@ void Delete(string city){
 }
 
 void Delete(int x, int y){
-    node *temp = head;
+    node *temp = headF;
     if(temp != NULL && temp->x == x && temp->y == y){
-        head = temp->next;
+        headF = temp->next;
         delete temp;
         return;
     }
@@ -81,7 +80,7 @@ void Delete(int x, int y){
 }
 
 void search(string city){
-    node *temp = head;
+    node *temp = headF;
     while(temp != NULL && temp->city != city){
         temp = temp->next;
     }
@@ -93,7 +92,7 @@ void search(string city){
 }
 
 void search(int x, int y){
-    node *temp = head;
+    node *temp = headF;
     while(temp != NULL && temp->x != x && temp->y != y){
         temp = temp->next;
     }
@@ -105,7 +104,7 @@ void search(int x, int y){
 }
 
 void printInRange(int x, int y, int dist){
-    node *temp = head;
+    node *temp = headF;
     while(temp != NULL){
         int a = temp->x - x;
         int b = temp->y - y;
@@ -116,28 +115,29 @@ void printInRange(int x, int y, int dist){
     }
 }
 
-void print(node *head){
-    while(head != NULL){
-        cout << head->city << " " << head->x << " " << head->y << endl;
-        head = head->next;
+void print(){
+    node *temp = headF;
+    while(temp != NULL){
+        cout << temp->city << " " << temp->x << " " << temp->y << endl;
+        temp = temp->next;
     }
 }
 
 int main(){
-    insertFront(&head, "Delhi", 28, 77);
-    insertFront(&head, "Mumbai", 19, 72);
-    insertLast(&head, "Kolkata", 22, 88);
-    insertFront(&head, "Chennai", 13, 80);
-    insertLast(&head, "Bangalore", 15, 77);
-    insertLast(&head, "Hyderabad", 17, 78);
-    insertFront(&head, "Ahmedabad", 23, 72);
-    insertLast(&head, "Pune", 18, 73);
-    insertFront(&head, "Jaipur", 26, 75);
-    print(head);
+    insertFront("Delhi", 28, 77);
+    insertFront("Mumbai", 19, 72);
+    insertLast("Kolkata", 22, 88);
+    insertFront("Chennai", 13, 80);
+    insertLast("Bangalore", 15, 77);
+    insertLast("Hyderabad", 17, 78);
+    insertFront("Ahmedabad", 23, 72);
+    insertLast("Pune", 18, 73);
+    insertFront("Jaipur", 26, 75);
+    print();
     cout << endl;
     Delete("Delhi");
     Delete(18, 73); 
-    print(head);
+    print();
     cout << endl;
     search("Mumbai");
     search(15, 77);
