@@ -6,7 +6,7 @@ class node{
     public:
         int data;
         node *next;
-} *sum2, *head1 = NULL, *head2 = NULL;;
+} *sum2 = NULL, *head1 = NULL, *head2 = NULL;;
 
 void insert(node **head, int data){
     node *temp = new node();
@@ -23,62 +23,13 @@ void print(node *head){
 }
 
 int sum(node *temp1, node *temp2){
-    //cout << "Hello0" << endl;
-    int carry=0, c;
-    if(temp1->next != NULL && temp2->next != NULL){
-        c = sum(temp1->next, temp2->next);
-        if(temp1 != head1 && temp2 != head2){
-            if(temp1->data + temp2->data + c > 9){
-                carry = 1;
-                insert(&sum2, (temp1->data + temp2->data + c)%10);
-            }
-            else{
-                carry = 0;
-                insert(&sum2, (temp1->data + temp2->data + c));
-            }
-        }
-        else if (temp1 == head1 && temp2 != head2){}
-
-        return carry;
-    }
-    else if (temp1->next == NULL && temp2->next != NULL){
-        c = sum(temp1, temp2->next);
-        if(temp1->data + temp2->data + c > 9){
-            carry = 1;
-            insert(&sum2, (temp1->data + temp2->data + c)%10);
-        }
-        else{
-            carry = 0;
-            insert(&sum2, (temp1->data + temp2->data + c));
-        }
-        return carry;
-    }
-    else if (temp1->next != NULL && temp2->next == NULL){
-        //cout << "Hello3" << endl;
-        c = sum(temp1->next, temp2);
-        if(temp1->data + temp2->data + c > 9){
-            carry = 1;
-            insert(&sum2, (temp1->data + temp2->data + c)%10);
-        }
-        else{
-            carry = 0;
-            insert(&sum2, (temp1->data + temp2->data + c));
-        }
-        return carry;
-    }
-    else if (temp1->next == NULL && temp2->next == NULL){
-        if(temp1->data + temp2->data > 9){
-            carry = 1;
-            insert(&sum2, (temp1->data + temp2->data)%10);
-        }
-        else{
-            insert(&sum2, (temp1->data + temp2->data));
-        }
-        return carry;
-    }
-    else{
+    if(temp1 == NULL && temp2 == NULL){
         return 0;
     }
+    int c = sum(temp1->next, temp2->next);
+    int s = temp1->data + temp2->data + c;
+    insert(&sum2, s%10);
+    return s/10;
 };
 
 int main(){
@@ -99,11 +50,6 @@ int main(){
     print(head1);
     cout << endl;
     print(head2);
-    int c1 = sum(head1, head2);
-    if(c1 == 1){
-        insert(&sum2, 1);
-    }
-    //cout << "Hello";
     cout << endl;
     print(sum2);
     return 0;
