@@ -133,15 +133,23 @@ int main(){
     insertFront("Ahmedabad", 23, 72);
     insertLast("Pune", 18, 73);
     insertFront("Jaipur", 26, 75);
+
+    cout << "All the city records are: " << endl;
     print();
     cout << endl;
+    
+    cout << "Records after deleting Delhi and (18, 73): " << endl;
     Delete("Delhi");
     Delete(18, 73); 
     print();
     cout << endl;
+
+    cout << "Search results for Mumbai and (15, 77): " << endl;
     search("Mumbai");
     search(15, 77);
     cout << endl;
+
+    cout << "All the city records within a distance of 10 units from (20, 80): " << endl;
     printInRange(20, 80, 10);
     return 0;
 }

@@ -1,31 +1,27 @@
 #include <iostream>
-#include <bits/stdc++.h>
 using namespace std;
-
-void swap(int *a, int *b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
 
 int main(){
     int min, minIndex, count=0;
-    int arr[12] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 11};
-    for(int i=0; i<11; i++){
+    int arr[10] = {5, 3, 7, 2, 0, 6, 9, 4, 8, 1};
+    for(int i=0; i<10; i++){
         min = arr[i];
         minIndex = i;
-        for(int j=i+1; j<12; j++){
+        for(int j=i+1; j<10; j++){
             if(arr[minIndex] > arr[j]){
                 min = arr[j];
                 minIndex = j;
             }
-            cout << ++count;
+            cout << ++count << " ";
         }
-        swap(arr[minIndex], arr[i]);
+        int temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = temp;
     }
 
-    for(int i=0; i<12; i++){
-        cout << endl << arr[i];
+    cout << endl << "Sorted array is: ";
+    for(int i=0; i<10; i++){
+        cout << arr[i] << " ";
     }
     
     return 0;

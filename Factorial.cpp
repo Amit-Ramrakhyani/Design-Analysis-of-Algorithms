@@ -16,8 +16,8 @@ int main(){
     for(int i=1; i<=n; i++){
         fac*=i;
         count++;
-        cout << count;
+        cout << count << " ";
     }
-    cout << endl << fac;
+    cout << endl << "Factorial of given number is: " << fac;
     return 0;
 }

@@ -16,7 +16,7 @@ int main(){
         int temp = n2%10;
         sum += pow(temp, len);
         n2/=10;
-        cout << count;
+        cout << count << " ";
     }
 
     if(n == sum)
