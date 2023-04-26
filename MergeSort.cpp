@@ -3,7 +3,7 @@ using namespace std;
 
 int arr[100], farr[100], n;
 
-void conquer(int low, int mid, int high){
+void merge(int low, int mid, int high){
     int i = low, j = mid+1, k = low;
     while(i <= mid && j <= high){
         if(arr[i] < arr[j]){
@@ -31,28 +31,31 @@ void conquer(int low, int mid, int high){
     }
 }
 
-void divide(int low, int high){
+void mergeSort(int low, int high){
     if(low < high){
         int mid = (low + high)/2;
-        divide(low, mid);
-        divide(mid+1, high);
-        conquer(low, mid, high);
+        mergeSort(low, mid);
+        mergeSort(mid+1, high);
+        merge(low, mid, high);
     }
 }
 
 int main(){
     cout << "Enter the number of elements: ";
     cin >> n;
+
     cout << "Enter the elements: ";
     for(int i = 0; i < n; i++){
         cin >> arr[i];
     }
-    divide(0, n-1);
-    conquer(0, n/2, n-1);
+    
+    mergeSort(0, n-1);
+    
     cout << "Sorted array: ";
     for(int i = 0; i < n; i++){
         cout << arr[i] << " ";
     }
+    
     cout << endl;
     return 0;
 }
